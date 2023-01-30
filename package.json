@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/Pavlenko-Artem/WorkoutApp/issues"
   },
-  "homepage": "https://github.com/Pavlenko-Artem/WorkoutApp#readme"
+  "homepage": "https://github.com/Pavlenko-Artem/WorkoutApp#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "colors": "^1.4.0"
+  }
 }
