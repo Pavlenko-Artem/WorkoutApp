@@ -1,0 +1,18 @@
+{
+  "name": "workout-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "workout",
+    "app"
+  ],
+  "author": "Artem Pavlenko",
+  "license": "ISC",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1"
+  }
+}
