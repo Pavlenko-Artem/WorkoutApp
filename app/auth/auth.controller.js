@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { hash } from 'argon2'
+import { hash, verify } from 'argon2'
 import asyncHandler from 'express-async-handler'
 
 import { prisma } from '../prisma.js'
@@ -11,13 +11,29 @@ import { generateToken } from './generate-token.js'
 // @route   POST /api/auth/login
 // @access  Public
 export const authUser = asyncHandler(async (req, res) => {
-	const user = await prisma.user.findMany({
+	const { email, password } = req.body
+
+	const user = await prisma.user.findUnique({
 		where: {
-			password: 'sds'
+			email
 		}
 	})
 
-	res.json(user)
+	if (!user) {
+		res.status(400)
+		throw new Error(`Пользователь не зарегистрирован`)
+	}
+
+	const isValidPassword = await verify(user.password, password)
+
+	if (user && isValidPassword) {
+		const token = generateToken(user.id)
+
+		res.json({ user, token })
+	} else {
+		res.status(400)
+		throw new Error(`Неверный пароль`)
+	}
 })
 
 // @desc    Register user
